@@ -1,6 +1,6 @@
 # [HiT-GAN](https://arxiv.org/pdf/2106.07631.pdf) Official TensorFlow Implementation
 
-HiT-GAN presents a Transformer-based generator that is trained based on Generative Adversarial Networks (GANs). It achieves state-of-the-art performance for high-resolution image synthesis. Please check our [NeurIPS 2021 paper](https://arxiv.org/pdf/2106.07631.pdf) for more details.
+HiT-GAN presents a Transformer-based generator that is trained based on Generative Adversarial Networks (GANs). It achieves state-of-the-art performance for high-resolution image synthesis. Please check our NeurIPS 2021 paper "[Improved Transformer for High-Resolution GANs](https://arxiv.org/pdf/2106.07631.pdf)" for more details.
 
 This implementation is based on TensorFlow 2.x. We use `tf.keras` layers for building the model and use `tf.data` for our input pipeline. The model is trained using a custom training loop with `tf.distribute` on multiple TPUs/GPUs.
 
