@@ -55,7 +55,7 @@ python run.py --mode=train --dataset=imagenet2012 \
   --use_tpu=False --use_ema_model=False
 ```
 
-Note that storing Exponential Moving Average (EMA) models is not supported with GPUs currently (`--use_ema_model=False`), which will lead to slight performance drop. Please set `train_batch_size` according to the number of GPUs for training.
+Please set `train_batch_size` according to the number of GPUs for training. __Note that storing Exponential Moving Average (EMA) models is not supported with GPUs currently (`--use_ema_model=False`), so training with GPUs will lead to slight performance drop.__
 
 ### Evaluate on ImageNet
 
@@ -71,6 +71,72 @@ python run.py --mode=eval --dataset=imagenet2012 \
 ```
 
 This command runs models with 8 P100 GPUs. Please set `eval_batch_size` according to the number of GPUs for evaluation. Please also note that `train_steps` and `use_ema_model` should be set according to the values used for training.
+
+## CelebA-HQ
+
+At the first time, download CelebA-HQ following `tensorflow_datasets` instruction from the [official guide](https://www.tensorflow.org/datasets/catalog/celeb_a_hq).
+
+### Train on CelebA-HQ
+
+The following command can be used to train a model on CelebA-HQ (which reflects the default hyperparameters used for the resolution of 256 in our paper) on TPUv2 4x4:
+
+```
+python run.py --mode=train --dataset=celeb_a_hq/256 \
+  --train_batch_size=256 --train_steps=250000 \
+  --image_crop_size=256 --image_crop_proportion=1.0 \
+  --save_every_n_steps=1000 \
+  --latent_dim=512 --generator_lr=0.00005 \
+  --discriminator_lr=0.00005 --channel_multiplier=2 \
+  --use_consistency_regularization=True \
+  --data_dir=$DATA_DIR --model_dir=$MODEL_DIR \
+  --use_tpu=True --master=$TPU_NAME
+```
+
+### Evaluate on CelebA-HQ
+
+Run the following command to evaluate the model on 8 P100 GPUs:
+
+```
+python run.py --mode=eval --dataset=celeb_a_hq/256 \
+  --eval_batch_size=128 --train_steps=250000 \
+  --image_crop_size=256 --image_crop_proportion=1.0 \
+  --latent_dim=512 --channel_multiplier=2 \
+  --data_dir=$DATA_DIR --model_dir=$MODEL_DIR \
+  --use_tpu=False --use_ema_model=True
+```
+
+## FFHQ
+
+At the first time, download the tfrecords of FFHQ from the [official site](https://github.com/NVlabs/ffhq-dataset) and put them into `$DATA_DIR`.
+
+### Train on FFHQ
+
+The following command can be used to train a model on FFHQ (which reflects the default hyperparameters used for the resolution of 256 in our paper) on TPUv2 4x4:
+
+```
+python run.py --mode=train --dataset=ffhq/256 \
+  --train_batch_size=256 --train_steps=500000 \
+  --image_crop_size=256 --image_crop_proportion=1.0 \
+  --save_every_n_steps=1000 \
+  --latent_dim=512 --generator_lr=0.00005 \
+  --discriminator_lr=0.00005 --channel_multiplier=2 \
+  --use_consistency_regularization=True \
+  --data_dir=$DATA_DIR --model_dir=$MODEL_DIR \
+  --use_tpu=True --master=$TPU_NAME
+```
+
+### Evaluate on FFHQ
+
+Run the following command to evaluate the model on 8 P100 GPUs:
+
+```
+python run.py --mode=eval --dataset=ffhq/256 \
+  --eval_batch_size=128 --train_steps=500000 \
+  --image_crop_size=256 --image_crop_proportion=1.0 \
+  --latent_dim=512 --channel_multiplier=2 \
+  --data_dir=$DATA_DIR --model_dir=$MODEL_DIR \
+  --use_tpu=False --use_ema_model=True
+```
 
 ## Cite
 
