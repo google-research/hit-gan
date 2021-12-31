@@ -56,7 +56,7 @@ flags.DEFINE_integer('save_every_n_steps', 1000,
                      'Number of steps to save models.')
 
 flags.DEFINE_integer('keep_checkpoint_max', 10,
-                     'maximum number of checkpoints to keep.')
+                     'Maximum number of checkpoints to keep.')
 
 flags.DEFINE_integer('latent_dim', 256, 'Dimension of the input latents.')
 
