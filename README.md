@@ -143,7 +143,7 @@ python run.py --mode=eval --dataset=ffhq/256 \
 ```
 @inproceedings{zhao2021improved,
   title = {Improved Transformer for High-Resolution {GANs}},
-  author = {Long Zhao and Zizhao Zhang and Ting Chen and Dimitris Metaxas abd Han Zhang},
+  author = {Long Zhao and Zizhao Zhang and Ting Chen and Dimitris Metaxas and Han Zhang},
   booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
   year = {2021}
 }
